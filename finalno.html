@@ -1,0 +1,67 @@
+
+
+            <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pour toujours</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        .heart { position: fixed; font-size: 2rem; pointer-events: none; animation: fall 3s linear forwards; z-index: 50; }
+        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+    </style>
+</head>
+<body class="bg-pink-50 flex items-center justify-center min-h-screen font-['Dancing_Script'] overflow-hidden">
+    <div id="main-card" class="text-center p-8 bg-white rounded-3xl shadow-2xl border-4 border-pink-200 max-w-lg relative">
+        <h1 id="title" class="text-4xl text-pink-600 mb-6">Allez, stp mon amour... 🥺</h1>
+        
+        <img id="main-img" src="https://i.pinimg.com/736x/c5/82/a6/c582a67471beed2d2f0ec7c61681b929.jpg" 
+             class="rounded-2xl mb-8 mx-auto w-64">
+
+        <div id="buttons-container" class="flex justify-center gap-8 h-16 items-center">
+            <button id="btn-oui" class="bg-green-400 text-white text-2xl py-3 px-12 rounded-full shadow-lg z-10">
+                OUI !
+            </button>
+            <button id="btn-non" class="bg-red-400 text-white text-2xl py-3 px-12 rounded-full shadow-lg transition-all duration-200">
+                Non
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const btnNon = document.getElementById('btn-non');
+        const btnOui = document.getElementById('btn-oui');
+        const title = document.getElementById('title');
+        const img = document.getElementById('main-img');
+
+        // LE BOUTON QUI FUIT
+        btnNon.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - btnNon.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btnNon.offsetHeight);
+            btnNon.style.position = 'fixed';
+            btnNon.style.left = `${x}px`;
+            btnNon.style.top = `${y}px`;
+        });
+
+        // LE CLIC SUR OUI
+        btnOui.addEventListener('click', () => {
+            btnNon.style.display = 'none';
+            title.innerHTML = "Tu voulais d'abord refuser pourquoi ? <br> Je t'aime ma vie, merciii ! ❤️";
+            img.src = "https://i.pinimg.com/736x/fb/0e/27/fb0e2767c3599aba0e5852ea3c1673ec.jpg";
+            
+            // Pluie de coeurs
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '-5vh';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 3000);
+            }, 100);
+        });
+    </script>
+</body>
+</html>
